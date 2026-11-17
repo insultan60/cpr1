@@ -29,12 +29,25 @@ export default function Header() {
     };
   }, [open]);
 
+  // On the homepage the header floats over the hero video: see-through glass
+  // at the top, the solid white bar once the visitor scrolls.
+  const overlay = pathname === "/";
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    if (!overlay) return;
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [overlay]);
+  const glass = overlay && !scrolled && !open;
+
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <header className="sticky top-0 z-40">
+    <header className={`${overlay ? "fixed inset-x-0" : "sticky"} top-0 z-40`}>
       {/* Utility bar */}
-      <div className="bg-navy-950 text-[13px] text-white/85">
+      <div className={`text-[13px] text-white/85 transition-colors duration-300 ${glass ? "bg-navy-950/30 backdrop-blur-md" : "bg-navy-950"}`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 sm:px-6">
           <div className="flex items-center gap-5">
             <a href={SITE.phoneHref} className="flex items-center gap-1.5 hover:text-white">
@@ -54,9 +67,13 @@ export default function Header() {
       </div>
 
       {/* Main bar */}
-      <div className="border-b border-navy-100 bg-white/95 backdrop-blur">
+      <div
+        className={`border-b backdrop-blur-md transition-colors duration-300 ${
+          glass ? "glass-nav border-white/15 bg-white/10" : "border-navy-100 bg-white/95"
+        }`}
+      >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <Logo />
+          <Logo light={glass} />
 
           <nav aria-label="Main" className="hidden lg:block">
             <ul className="flex items-center gap-1">
@@ -65,7 +82,9 @@ export default function Header() {
                   <Link
                     href={item.href}
                     className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-[15px] font-medium transition-colors ${
-                      isActive(item.href) ? "text-brand-red" : "text-navy-900 hover:text-brand-red"
+                      isActive(item.href)
+                        ? glass ? "text-white underline decoration-brand-red decoration-2 underline-offset-8" : "text-brand-red"
+                        : glass ? "text-white/90 hover:text-white" : "text-navy-900 hover:text-brand-red"
                     }`}
                   >
                     {item.label}
@@ -101,7 +120,7 @@ export default function Header() {
             </Link>
             <button
               type="button"
-              className="grid size-11 place-items-center rounded-full text-navy-900 hover:bg-navy-50 lg:hidden"
+              className={`grid size-11 place-items-center rounded-full lg:hidden ${glass ? "text-white hover:bg-white/10" : "text-navy-900 hover:bg-navy-50"}`}
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               aria-controls="mobile-menu"

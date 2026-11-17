@@ -4,6 +4,7 @@ import { COURSES } from "@/lib/courses";
 import { FAQS } from "@/lib/faqs";
 import { SITE } from "@/lib/site";
 import ScheduleList from "./components/ScheduleList";
+import HeroVideo from "./components/HeroVideo";
 import type { CSSProperties } from "react";
 import { ButtonLink, Container, CourseCard, CtaBand, EcgLine, Eyebrow, FaqList, Reveal, SectionHead } from "./components/ui";
 import {
@@ -57,18 +58,13 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="px-3 pt-3 sm:px-4 sm:pt-4">
-        <div className="relative isolate overflow-hidden rounded-3xl bg-navy-900">
-          <Image
-            src="/images/hero.webp"
-            alt=""
-            fill
-            sizes="100vw"
-            fetchPriority="high"
-            loading="eager"
-            className="-z-20 object-cover object-center"
-          />
-          <div className="absolute inset-0 -z-10 bg-linear-to-r from-navy-950/80 via-navy-950/50 to-brand-red/25" />
+      {/* Full-bleed so the video also sits behind the fixed, see-through
+          header; the top padding clears the header. */}
+      <section>
+        <div className="relative isolate overflow-hidden bg-navy-900 pt-[104px]">
+          <HeroVideo src="/videos/drz-hero-desktop.mp4" poster="/images/hero.webp" />
+          <div className="absolute inset-0 -z-10 bg-navy-950/35" />
+          <div className="absolute inset-0 -z-10 bg-linear-to-r from-navy-950/85 via-navy-950/60 to-brand-red/30" />
           <Container className="py-20 sm:py-28 lg:py-32">
             <div className="max-w-2xl">
               <div className="animate-rise">
