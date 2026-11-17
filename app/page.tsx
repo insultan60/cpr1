@@ -62,7 +62,7 @@ export default function Home() {
           header; the top padding clears the header. */}
       <section>
         <div className="relative isolate overflow-hidden bg-navy-900 pt-[104px]">
-          <HeroVideo src="/videos/drz-hero-desktop.mp4" poster="/images/hero.webp" />
+          <HeroVideo src="/videos/drz-hero-desktop.mp4" mobileSrc="/videos/drz-hero-mobile.webm" poster="/images/hero.webp" />
           <div className="absolute inset-0 -z-10 bg-navy-950/35" />
           <div className="absolute inset-0 -z-10 bg-linear-to-r from-navy-950/85 via-navy-950/60 to-brand-red/30" />
           <Container className="py-20 sm:py-28 lg:py-32">
