@@ -15,12 +15,16 @@ export default function HeroVideo({ src, poster, rate = 0.7 }: { src: string; po
     return () => v.removeEventListener("loadeddata", set);
   }, [rate]);
 
+  // Plain <video> paths don't get Next's basePath (GitHub Pages serves the
+  // site from /cpr), so add it here, as lib/image-loader.ts does for images.
+  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
   return (
     <video
       ref={ref}
       className="absolute inset-0 -z-20 size-full object-cover object-[center_20%]"
-      src={src}
-      poster={poster}
+      src={`${base}${src}`}
+      poster={`${base}${poster}`}
       autoPlay
       muted
       loop
