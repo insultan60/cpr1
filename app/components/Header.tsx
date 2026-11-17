@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { SITE } from "@/lib/site";
 import { COURSES } from "@/lib/courses";
 import Logo from "./Logo";
-import { ChevronDownIcon, ClockIcon, CloseIcon, MailIcon, MenuIcon, PhoneIcon } from "./Icons";
+import { ChevronDownIcon, CloseIcon, MenuIcon } from "./Icons";
 
 const NAV = [
   { label: "Courses", href: "/courses", sub: COURSES.map((c) => ({ label: c.short, href: `/courses/${c.slug}` })) },
@@ -47,21 +47,18 @@ export default function Header() {
   return (
     <header className={`${overlay ? "fixed inset-x-0" : "sticky"} top-0 z-40`}>
       {/* Utility bar */}
-      <div className={`text-[13px] text-white/85 transition-colors duration-300 ${glass ? "bg-navy-950/30 backdrop-blur-md" : "bg-navy-950"}`}>
+      <div className={`text-[13px] text-white/85 transition-colors duration-300 ${glass ? "bg-transparent" : "bg-navy-950"}`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 sm:px-6">
           <div className="flex items-center gap-5">
             <a href={SITE.phoneHref} className="flex items-center gap-1.5 hover:text-white">
-              <PhoneIcon className="size-3.5" />
-              {SITE.phone}
+              Call {SITE.phone}
             </a>
             <a href={`mailto:${SITE.email}`} className="hidden items-center gap-1.5 hover:text-white sm:flex">
-              <MailIcon className="size-3.5" />
               {SITE.email}
             </a>
           </div>
           <div className="hidden items-center gap-1.5 md:flex">
-            <ClockIcon className="size-3.5" />
-            {SITE.hours} · AHA-certified instructor
+            Open {SITE.hours} · AHA-certified instructor
           </div>
         </div>
       </div>

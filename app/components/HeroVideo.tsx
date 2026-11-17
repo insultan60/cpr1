@@ -18,7 +18,7 @@ export default function HeroVideo({ src, poster, rate = 0.7 }: { src: string; po
   return (
     <video
       ref={ref}
-      className="absolute inset-0 -z-20 size-full object-cover object-center"
+      className="absolute inset-0 -z-20 size-full object-cover object-[center_20%]"
       src={src}
       poster={poster}
       autoPlay
