@@ -4,6 +4,7 @@ import { COURSES } from "@/lib/courses";
 import { FAQS } from "@/lib/faqs";
 import { SITE } from "@/lib/site";
 import ScheduleList from "./components/ScheduleList";
+import StoryReel, { REELS } from "./components/StoryReel";
 import HeroVideo from "./components/HeroVideo";
 import type { CSSProperties } from "react";
 import { ButtonLink, Container, CourseCard, CtaBand, EcgLine, Eyebrow, FaqList, Reveal, SectionHead } from "./components/ui";
@@ -148,6 +149,27 @@ export default function Home() {
             </a>
             .
           </p>
+        </Container>
+      </section>
+
+      {/* Course stories */}
+      <section className="py-20">
+        <Container>
+          <SectionHead
+            eyebrow="Real Stories"
+            title="Every course starts with a moment that matters"
+            intro="A collapse at a fire scene, a player down at the park, a child choking at lunch. Watch why each course exists and how we train you to act."
+          />
+          <div className="mt-12 grid gap-8 md:grid-cols-3">
+            {COURSES.filter((c) => REELS[c.slug]).map((c, i) => (
+              <Reveal key={c.slug} delay={i * 120}>
+                <StoryReel reel={REELS[c.slug]} title={c.short} shape="tall" />
+                <Link href={`/courses/${c.slug}`} className="mt-4 block text-center font-heading font-bold text-navy-900 hover:text-brand-red">
+                  {c.name} &rarr;
+                </Link>
+              </Reveal>
+            ))}
+          </div>
         </Container>
       </section>
 

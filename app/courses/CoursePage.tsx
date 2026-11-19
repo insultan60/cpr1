@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { COURSES, getCourse, priceLabel } from "@/lib/courses";
 import { SITE } from "@/lib/site";
 import EnquiryForm from "../components/EnquiryForm";
+import StoryReel, { REELS } from "../components/StoryReel";
 import { AwardIcon, CheckIcon, ClockIcon, LaptopIcon, UsersIcon } from "../components/Icons";
 import { ButtonLink, Container, CtaBand, JsonLd, PageHero, SectionHead } from "../components/ui";
 
@@ -81,6 +82,27 @@ export default function CoursePage({ slug }: { slug: string }) {
           )}
         </Container>
       </section>
+
+      {REELS[c.slug] && (
+        <section className="pb-20">
+          <Container className="grid items-center gap-10 lg:grid-cols-5">
+            <div className="lg:col-span-2">
+              <SectionHead
+                center={false}
+                eyebrow="Watch the story"
+                title="Why this course matters"
+                intro={`A real moment where someone needed help, and how Danny and Rosie teach the ${c.short} skills that change the outcome.`}
+              />
+              <div className="mt-8">
+                <ButtonLink href="#reserve">Reserve a Seat</ButtonLink>
+              </div>
+            </div>
+            <div className="lg:col-span-3">
+              <StoryReel reel={REELS[c.slug]} title={c.name} />
+            </div>
+          </Container>
+        </section>
+      )}
 
       <section className="pb-20">
         <Container className="grid gap-6 md:grid-cols-2">
