@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
+import { COURSES } from "@/lib/courses";
+import StoryReel, { REELS } from "../components/StoryReel";
 import type { CSSProperties } from "react";
 import { SITE } from "@/lib/site";
 import { AwardIcon, HeartPulseIcon, UsersIcon } from "../components/Icons";
-import { ButtonLink, Container, CtaBand, PageHero, SectionHead } from "../components/ui";
+import { ButtonLink, Container, CtaBand, PageHero, Reveal, SectionHead } from "../components/ui";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -72,6 +75,27 @@ export default function AboutPage() {
             <ButtonLink href="/courses" variant="navy">
               Explore Our Courses
             </ButtonLink>
+          </div>
+        </Container>
+      </section>
+
+      {/* Course story reels, the same ones as on the homepage. */}
+      <section className="py-20">
+        <Container>
+          <SectionHead
+            eyebrow="Real Stories"
+            title="Why we teach what we teach"
+            intro="A collapse at a fire scene, a player down at the park, a child choking at lunch. Watch the moments behind each course and how we train you to act."
+          />
+          <div className="mt-12 grid gap-8 md:grid-cols-3">
+            {COURSES.filter((c) => REELS[c.slug]).map((c, i) => (
+              <Reveal key={c.slug} delay={i * 120}>
+                <StoryReel reel={REELS[c.slug]} title={c.short} shape="tall" />
+                <Link href={`/courses/${c.slug}`} className="mt-4 block text-center font-heading font-bold text-navy-900 hover:text-brand-red">
+                  {c.name} &rarr;
+                </Link>
+              </Reveal>
+            ))}
           </div>
         </Container>
       </section>
