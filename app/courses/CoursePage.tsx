@@ -5,7 +5,8 @@ import { notFound } from "next/navigation";
 import { COURSES, getCourse, priceLabel } from "@/lib/courses";
 import { SITE } from "@/lib/site";
 import EnquiryForm from "../components/EnquiryForm";
-import StoryReel, { REELS } from "../components/StoryReel";
+import StoryReel from "../components/StoryReel";
+import { REELS } from "@/lib/reels";
 import { AwardIcon, CheckIcon, ClockIcon, LaptopIcon, UsersIcon } from "../components/Icons";
 import { ButtonLink, Container, CtaBand, JsonLd, PageHero, SectionHead } from "../components/ui";
 

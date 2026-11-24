@@ -2,13 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/** Course story reels in public/videos/courses, one per course. */
-export const REELS: Record<string, string> = {
-  bls: "bls",
-  "heartsaver-cpr-first-aid-aed": "heartsaver",
-  "pediatric-first-aid-cpr-aed": "pediatric",
-};
-
 /**
  * A course's story reel. Shows the poster with a play button and only loads
  * the video when someone presses play, so pages stay light. `shape` picks the
